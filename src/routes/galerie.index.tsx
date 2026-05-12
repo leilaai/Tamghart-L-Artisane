@@ -1,9 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { symboles } from "@/lib/data";
-import textile from "@/assets/textile-amazigh.jpg";
-import collection from "@/assets/creations-collection.jpg";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { symboles, articles } from "@/lib/data";
 
-export const Route = createFileRoute("/galerie")({
+export const Route = createFileRoute("/galerie/")({
   head: () => ({
     meta: [
       { title: "Galerie culturelle amazighe — Tamghart" },
@@ -41,19 +39,21 @@ function GaleriePage() {
       <section className="bg-sand/40 py-20">
         <div className="mx-auto max-w-7xl px-6">
           <h2 className="mb-10 font-display text-4xl text-earth">Articles & traditions</h2>
-          <div className="grid gap-8 md:grid-cols-2">
-            {[
-              { title: "Le tissage, une écriture sans mots", img: textile, excerpt: "Comprendre comment les motifs des tapis Beni Ouarain se transmettent de mère en fille depuis le XVIᵉ siècle." },
-              { title: "Bijoux d'argent, ancrage du féminin", img: collection, excerpt: "L'argent, le corail et l'ambre : matériaux protecteurs portés depuis l'enfance." },
-            ].map((art) => (
-              <article key={art.title} className="overflow-hidden bg-card">
-                <img src={art.img} alt={art.title} width={1200} height={800} loading="lazy" className="aspect-[3/2] w-full object-cover" />
+          <div className="grid gap-8 md:grid-cols-3">
+            {articles.map((art) => (
+              <Link
+                key={art.slug}
+                to="/galerie/$slug"
+                params={{ slug: art.slug }}
+                className="group block overflow-hidden bg-card transition-shadow hover:shadow-xl"
+              >
+                <img src={art.image} alt={art.title} width={1200} height={800} loading="lazy" className="aspect-[3/2] w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 <div className="p-8">
                   <h3 className="font-display text-2xl text-earth">{art.title}</h3>
                   <p className="mt-3 text-sm text-foreground/80">{art.excerpt}</p>
-                  <button className="mt-5 text-xs tracking-brand text-accent hover:underline">LIRE L'ARTICLE →</button>
+                  <span className="mt-5 inline-block text-xs tracking-brand text-accent group-hover:underline">LIRE L'ARTICLE →</span>
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
         </div>
