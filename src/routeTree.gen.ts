@@ -9,38 +9,216 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RechercheRouteImport } from './routes/recherche'
+import { Route as GalerieRouteImport } from './routes/galerie'
+import { Route as CreationsRouteImport } from './routes/creations'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ArtisanesIndexRouteImport } from './routes/artisanes.index'
+import { Route as ArtisanesIdRouteImport } from './routes/artisanes.$id'
+import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
+import { Route as AdminCreationsRouteImport } from './routes/admin.creations'
+import { Route as AdminCommandesRouteImport } from './routes/admin.commandes'
+import { Route as AdminArtisanesRouteImport } from './routes/admin.artisanes'
 
+const RechercheRoute = RechercheRouteImport.update({
+  id: '/recherche',
+  path: '/recherche',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalerieRoute = GalerieRouteImport.update({
+  id: '/galerie',
+  path: '/galerie',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CreationsRoute = CreationsRouteImport.update({
+  id: '/creations',
+  path: '/creations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ArtisanesIndexRoute = ArtisanesIndexRouteImport.update({
+  id: '/artisanes/',
+  path: '/artisanes/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArtisanesIdRoute = ArtisanesIdRouteImport.update({
+  id: '/artisanes/$id',
+  path: '/artisanes/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminDashboardRoute = AdminDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCreationsRoute = AdminCreationsRouteImport.update({
+  id: '/creations',
+  path: '/creations',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCommandesRoute = AdminCommandesRouteImport.update({
+  id: '/commandes',
+  path: '/commandes',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminArtisanesRoute = AdminArtisanesRouteImport.update({
+  id: '/artisanes',
+  path: '/artisanes',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/contact': typeof ContactRoute
+  '/creations': typeof CreationsRoute
+  '/galerie': typeof GalerieRoute
+  '/recherche': typeof RechercheRoute
+  '/admin/artisanes': typeof AdminArtisanesRoute
+  '/admin/commandes': typeof AdminCommandesRoute
+  '/admin/creations': typeof AdminCreationsRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/artisanes/$id': typeof ArtisanesIdRoute
+  '/artisanes/': typeof ArtisanesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/contact': typeof ContactRoute
+  '/creations': typeof CreationsRoute
+  '/galerie': typeof GalerieRoute
+  '/recherche': typeof RechercheRoute
+  '/admin/artisanes': typeof AdminArtisanesRoute
+  '/admin/commandes': typeof AdminCommandesRoute
+  '/admin/creations': typeof AdminCreationsRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/artisanes/$id': typeof ArtisanesIdRoute
+  '/artisanes': typeof ArtisanesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/contact': typeof ContactRoute
+  '/creations': typeof CreationsRoute
+  '/galerie': typeof GalerieRoute
+  '/recherche': typeof RechercheRoute
+  '/admin/artisanes': typeof AdminArtisanesRoute
+  '/admin/commandes': typeof AdminCommandesRoute
+  '/admin/creations': typeof AdminCreationsRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/artisanes/$id': typeof ArtisanesIdRoute
+  '/artisanes/': typeof ArtisanesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/contact'
+    | '/creations'
+    | '/galerie'
+    | '/recherche'
+    | '/admin/artisanes'
+    | '/admin/commandes'
+    | '/admin/creations'
+    | '/admin/dashboard'
+    | '/artisanes/$id'
+    | '/artisanes/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/admin'
+    | '/contact'
+    | '/creations'
+    | '/galerie'
+    | '/recherche'
+    | '/admin/artisanes'
+    | '/admin/commandes'
+    | '/admin/creations'
+    | '/admin/dashboard'
+    | '/artisanes/$id'
+    | '/artisanes'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/contact'
+    | '/creations'
+    | '/galerie'
+    | '/recherche'
+    | '/admin/artisanes'
+    | '/admin/commandes'
+    | '/admin/creations'
+    | '/admin/dashboard'
+    | '/artisanes/$id'
+    | '/artisanes/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
+  ContactRoute: typeof ContactRoute
+  CreationsRoute: typeof CreationsRoute
+  GalerieRoute: typeof GalerieRoute
+  RechercheRoute: typeof RechercheRoute
+  ArtisanesIdRoute: typeof ArtisanesIdRoute
+  ArtisanesIndexRoute: typeof ArtisanesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/recherche': {
+      id: '/recherche'
+      path: '/recherche'
+      fullPath: '/recherche'
+      preLoaderRoute: typeof RechercheRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/galerie': {
+      id: '/galerie'
+      path: '/galerie'
+      fullPath: '/galerie'
+      preLoaderRoute: typeof GalerieRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/creations': {
+      id: '/creations'
+      path: '/creations'
+      fullPath: '/creations'
+      preLoaderRoute: typeof CreationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +226,77 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/artisanes/': {
+      id: '/artisanes/'
+      path: '/artisanes'
+      fullPath: '/artisanes/'
+      preLoaderRoute: typeof ArtisanesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/artisanes/$id': {
+      id: '/artisanes/$id'
+      path: '/artisanes/$id'
+      fullPath: '/artisanes/$id'
+      preLoaderRoute: typeof ArtisanesIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/dashboard': {
+      id: '/admin/dashboard'
+      path: '/dashboard'
+      fullPath: '/admin/dashboard'
+      preLoaderRoute: typeof AdminDashboardRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/creations': {
+      id: '/admin/creations'
+      path: '/creations'
+      fullPath: '/admin/creations'
+      preLoaderRoute: typeof AdminCreationsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/commandes': {
+      id: '/admin/commandes'
+      path: '/commandes'
+      fullPath: '/admin/commandes'
+      preLoaderRoute: typeof AdminCommandesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/artisanes': {
+      id: '/admin/artisanes'
+      path: '/artisanes'
+      fullPath: '/admin/artisanes'
+      preLoaderRoute: typeof AdminArtisanesRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
+interface AdminRouteChildren {
+  AdminArtisanesRoute: typeof AdminArtisanesRoute
+  AdminCommandesRoute: typeof AdminCommandesRoute
+  AdminCreationsRoute: typeof AdminCreationsRoute
+  AdminDashboardRoute: typeof AdminDashboardRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminArtisanesRoute: AdminArtisanesRoute,
+  AdminCommandesRoute: AdminCommandesRoute,
+  AdminCreationsRoute: AdminCreationsRoute,
+  AdminDashboardRoute: AdminDashboardRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
+  ContactRoute: ContactRoute,
+  CreationsRoute: CreationsRoute,
+  GalerieRoute: GalerieRoute,
+  RechercheRoute: RechercheRoute,
+  ArtisanesIdRoute: ArtisanesIdRoute,
+  ArtisanesIndexRoute: ArtisanesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
