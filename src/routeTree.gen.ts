@@ -72,14 +72,14 @@ const ArtisanesIndexRoute = ArtisanesIndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const GalerieSlugRoute = GalerieSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => GalerieRoute,
+  id: '/galerie/$slug',
+  path: '/galerie/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const CreationsIdRoute = CreationsIdRouteImport.update({
-  id: '/$id',
-  path: '/$id',
-  getParentRoute: () => CreationsRoute,
+  id: '/creations/$id',
+  path: '/creations/$id',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ArtisanesIdRoute = ArtisanesIdRouteImport.update({
   id: '/artisanes/$id',
@@ -227,6 +227,8 @@ export interface RootRouteChildren {
   PanierRoute: typeof PanierRoute
   RechercheRoute: typeof RechercheRoute
   ArtisanesIdRoute: typeof ArtisanesIdRoute
+  CreationsIdRoute: typeof CreationsIdRoute
+  GalerieSlugRoute: typeof GalerieSlugRoute
   ArtisanesIndexRoute: typeof ArtisanesIndexRoute
   CreationsIndexRoute: typeof CreationsIndexRoute
   GalerieIndexRoute: typeof GalerieIndexRoute
@@ -299,17 +301,17 @@ declare module '@tanstack/react-router' {
     }
     '/galerie/$slug': {
       id: '/galerie/$slug'
-      path: '/$slug'
+      path: '/galerie/$slug'
       fullPath: '/galerie/$slug'
       preLoaderRoute: typeof GalerieSlugRouteImport
-      parentRoute: typeof GalerieRoute
+      parentRoute: typeof rootRouteImport
     }
     '/creations/$id': {
       id: '/creations/$id'
-      path: '/$id'
+      path: '/creations/$id'
       fullPath: '/creations/$id'
       preLoaderRoute: typeof CreationsIdRouteImport
-      parentRoute: typeof CreationsRoute
+      parentRoute: typeof rootRouteImport
     }
     '/artisanes/$id': {
       id: '/artisanes/$id'
@@ -373,6 +375,8 @@ const rootRouteChildren: RootRouteChildren = {
   PanierRoute: PanierRoute,
   RechercheRoute: RechercheRoute,
   ArtisanesIdRoute: ArtisanesIdRoute,
+  CreationsIdRoute: CreationsIdRoute,
+  GalerieSlugRoute: GalerieSlugRoute,
   ArtisanesIndexRoute: ArtisanesIndexRoute,
   CreationsIndexRoute: CreationsIndexRoute,
   GalerieIndexRoute: GalerieIndexRoute,
@@ -380,13 +384,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
