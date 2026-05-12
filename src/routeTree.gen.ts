@@ -10,12 +10,16 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RechercheRouteImport } from './routes/recherche'
-import { Route as GalerieRouteImport } from './routes/galerie'
-import { Route as CreationsRouteImport } from './routes/creations'
+import { Route as PanierRouteImport } from './routes/panier'
+import { Route as FavorisRouteImport } from './routes/favoris'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as GalerieIndexRouteImport } from './routes/galerie.index'
+import { Route as CreationsIndexRouteImport } from './routes/creations.index'
 import { Route as ArtisanesIndexRouteImport } from './routes/artisanes.index'
+import { Route as GalerieSlugRouteImport } from './routes/galerie.$slug'
+import { Route as CreationsIdRouteImport } from './routes/creations.$id'
 import { Route as ArtisanesIdRouteImport } from './routes/artisanes.$id'
 import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
 import { Route as AdminCreationsRouteImport } from './routes/admin.creations'
@@ -27,14 +31,14 @@ const RechercheRoute = RechercheRouteImport.update({
   path: '/recherche',
   getParentRoute: () => rootRouteImport,
 } as any)
-const GalerieRoute = GalerieRouteImport.update({
-  id: '/galerie',
-  path: '/galerie',
+const PanierRoute = PanierRouteImport.update({
+  id: '/panier',
+  path: '/panier',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CreationsRoute = CreationsRouteImport.update({
-  id: '/creations',
-  path: '/creations',
+const FavorisRoute = FavorisRouteImport.update({
+  id: '/favoris',
+  path: '/favoris',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -52,9 +56,29 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GalerieIndexRoute = GalerieIndexRouteImport.update({
+  id: '/galerie/',
+  path: '/galerie/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CreationsIndexRoute = CreationsIndexRouteImport.update({
+  id: '/creations/',
+  path: '/creations/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ArtisanesIndexRoute = ArtisanesIndexRouteImport.update({
   id: '/artisanes/',
   path: '/artisanes/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalerieSlugRoute = GalerieSlugRouteImport.update({
+  id: '/galerie/$slug',
+  path: '/galerie/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CreationsIdRoute = CreationsIdRouteImport.update({
+  id: '/creations/$id',
+  path: '/creations/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ArtisanesIdRoute = ArtisanesIdRouteImport.update({
@@ -87,44 +111,56 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/contact': typeof ContactRoute
-  '/creations': typeof CreationsRoute
-  '/galerie': typeof GalerieRoute
+  '/favoris': typeof FavorisRoute
+  '/panier': typeof PanierRoute
   '/recherche': typeof RechercheRoute
   '/admin/artisanes': typeof AdminArtisanesRoute
   '/admin/commandes': typeof AdminCommandesRoute
   '/admin/creations': typeof AdminCreationsRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/artisanes/$id': typeof ArtisanesIdRoute
+  '/creations/$id': typeof CreationsIdRoute
+  '/galerie/$slug': typeof GalerieSlugRoute
   '/artisanes/': typeof ArtisanesIndexRoute
+  '/creations/': typeof CreationsIndexRoute
+  '/galerie/': typeof GalerieIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/contact': typeof ContactRoute
-  '/creations': typeof CreationsRoute
-  '/galerie': typeof GalerieRoute
+  '/favoris': typeof FavorisRoute
+  '/panier': typeof PanierRoute
   '/recherche': typeof RechercheRoute
   '/admin/artisanes': typeof AdminArtisanesRoute
   '/admin/commandes': typeof AdminCommandesRoute
   '/admin/creations': typeof AdminCreationsRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/artisanes/$id': typeof ArtisanesIdRoute
+  '/creations/$id': typeof CreationsIdRoute
+  '/galerie/$slug': typeof GalerieSlugRoute
   '/artisanes': typeof ArtisanesIndexRoute
+  '/creations': typeof CreationsIndexRoute
+  '/galerie': typeof GalerieIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/contact': typeof ContactRoute
-  '/creations': typeof CreationsRoute
-  '/galerie': typeof GalerieRoute
+  '/favoris': typeof FavorisRoute
+  '/panier': typeof PanierRoute
   '/recherche': typeof RechercheRoute
   '/admin/artisanes': typeof AdminArtisanesRoute
   '/admin/commandes': typeof AdminCommandesRoute
   '/admin/creations': typeof AdminCreationsRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/artisanes/$id': typeof ArtisanesIdRoute
+  '/creations/$id': typeof CreationsIdRoute
+  '/galerie/$slug': typeof GalerieSlugRoute
   '/artisanes/': typeof ArtisanesIndexRoute
+  '/creations/': typeof CreationsIndexRoute
+  '/galerie/': typeof GalerieIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -132,54 +168,70 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/contact'
-    | '/creations'
-    | '/galerie'
+    | '/favoris'
+    | '/panier'
     | '/recherche'
     | '/admin/artisanes'
     | '/admin/commandes'
     | '/admin/creations'
     | '/admin/dashboard'
     | '/artisanes/$id'
+    | '/creations/$id'
+    | '/galerie/$slug'
     | '/artisanes/'
+    | '/creations/'
+    | '/galerie/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/admin'
     | '/contact'
-    | '/creations'
-    | '/galerie'
+    | '/favoris'
+    | '/panier'
     | '/recherche'
     | '/admin/artisanes'
     | '/admin/commandes'
     | '/admin/creations'
     | '/admin/dashboard'
     | '/artisanes/$id'
+    | '/creations/$id'
+    | '/galerie/$slug'
     | '/artisanes'
+    | '/creations'
+    | '/galerie'
   id:
     | '__root__'
     | '/'
     | '/admin'
     | '/contact'
-    | '/creations'
-    | '/galerie'
+    | '/favoris'
+    | '/panier'
     | '/recherche'
     | '/admin/artisanes'
     | '/admin/commandes'
     | '/admin/creations'
     | '/admin/dashboard'
     | '/artisanes/$id'
+    | '/creations/$id'
+    | '/galerie/$slug'
     | '/artisanes/'
+    | '/creations/'
+    | '/galerie/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
   ContactRoute: typeof ContactRoute
-  CreationsRoute: typeof CreationsRoute
-  GalerieRoute: typeof GalerieRoute
+  FavorisRoute: typeof FavorisRoute
+  PanierRoute: typeof PanierRoute
   RechercheRoute: typeof RechercheRoute
   ArtisanesIdRoute: typeof ArtisanesIdRoute
+  CreationsIdRoute: typeof CreationsIdRoute
+  GalerieSlugRoute: typeof GalerieSlugRoute
   ArtisanesIndexRoute: typeof ArtisanesIndexRoute
+  CreationsIndexRoute: typeof CreationsIndexRoute
+  GalerieIndexRoute: typeof GalerieIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -191,18 +243,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RechercheRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/galerie': {
-      id: '/galerie'
-      path: '/galerie'
-      fullPath: '/galerie'
-      preLoaderRoute: typeof GalerieRouteImport
+    '/panier': {
+      id: '/panier'
+      path: '/panier'
+      fullPath: '/panier'
+      preLoaderRoute: typeof PanierRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/creations': {
-      id: '/creations'
-      path: '/creations'
-      fullPath: '/creations'
-      preLoaderRoute: typeof CreationsRouteImport
+    '/favoris': {
+      id: '/favoris'
+      path: '/favoris'
+      fullPath: '/favoris'
+      preLoaderRoute: typeof FavorisRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -226,11 +278,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/galerie/': {
+      id: '/galerie/'
+      path: '/galerie'
+      fullPath: '/galerie/'
+      preLoaderRoute: typeof GalerieIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/creations/': {
+      id: '/creations/'
+      path: '/creations'
+      fullPath: '/creations/'
+      preLoaderRoute: typeof CreationsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/artisanes/': {
       id: '/artisanes/'
       path: '/artisanes'
       fullPath: '/artisanes/'
       preLoaderRoute: typeof ArtisanesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/galerie/$slug': {
+      id: '/galerie/$slug'
+      path: '/galerie/$slug'
+      fullPath: '/galerie/$slug'
+      preLoaderRoute: typeof GalerieSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/creations/$id': {
+      id: '/creations/$id'
+      path: '/creations/$id'
+      fullPath: '/creations/$id'
+      preLoaderRoute: typeof CreationsIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/artisanes/$id': {
@@ -291,11 +371,15 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
   ContactRoute: ContactRoute,
-  CreationsRoute: CreationsRoute,
-  GalerieRoute: GalerieRoute,
+  FavorisRoute: FavorisRoute,
+  PanierRoute: PanierRoute,
   RechercheRoute: RechercheRoute,
   ArtisanesIdRoute: ArtisanesIdRoute,
+  CreationsIdRoute: CreationsIdRoute,
+  GalerieSlugRoute: GalerieSlugRoute,
   ArtisanesIndexRoute: ArtisanesIndexRoute,
+  CreationsIndexRoute: CreationsIndexRoute,
+  GalerieIndexRoute: GalerieIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
