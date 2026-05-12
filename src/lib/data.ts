@@ -18,14 +18,22 @@ export type Artisane = {
   id: string;
   firstName: string;
   lastName: string;
+  name: string;
   region: string;
   craft: string;
   bio: string;
   image: string;
   experienceYears: number;
+  experience: string;
 };
 
-export const artisanes: Artisane[] = [
+const mk = (a: Omit<Artisane, "name" | "experience">): Artisane => ({
+  ...a,
+  name: `${a.firstName} ${a.lastName}`,
+  experience: `${a.experienceYears} ans d'expérience`,
+});
+
+export const artisanes: Artisane[] = ([
   {
     id: "fatima-azuli",
     firstName: "Fatima",
