@@ -84,7 +84,7 @@ export const artisanes: Artisane[] = ([
     image: artisanePoterie,
     experienceYears: 35,
   },
-];
+] as Omit<Artisane, "name" | "experience">[]).map(mk);
 
 export type Creation = {
   id: string;
