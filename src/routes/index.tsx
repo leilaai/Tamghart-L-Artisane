@@ -1,10 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import hero from "@/assets/hero-artisane.jpg";
 import textile from "@/assets/textile-amazigh.jpg";
-import { artisanes, creations } from "@/lib/data";
-import { ArrowRight, Search, Heart } from "lucide-react";
+import { artisanes, creations, stats } from "@/lib/data";
+import { ArrowRight, Search, Heart, Filter } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useStore } from "@/lib/store";
+import { AmazighOrnament } from "@/components/AmazighOrnament";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -23,16 +24,22 @@ const pillars = [
   { title: "Femmes inspirantes", desc: "Soutenir leurs ateliers, c'est soutenir leurs villages.", bg: "bg-honey text-earth", to: "/artisanes" as const },
 ];
 
+const categories = ["Tous", "Tapis", "Bijoux", "Broderie", "Poterie"] as const;
+
 function Home() {
   const [q, setQ] = useState("");
+  const [cat, setCat] = useState<(typeof categories)[number]>("Tous");
   const term = q.toLowerCase().trim();
+  const hasFilter = term.length > 0 || cat !== "Tous";
+
   const results = useMemo(() => {
-    if (!term) return null;
+    if (!hasFilter) return null;
+    const matchTerm = (s: string) => !term || s.toLowerCase().includes(term);
     return {
-      creations: creations.filter((c) => c.name.toLowerCase().includes(term) || c.category.toLowerCase().includes(term) || c.description.toLowerCase().includes(term)),
-      artisanes: artisanes.filter((a) => a.name.toLowerCase().includes(term) || a.craft.toLowerCase().includes(term) || a.region.toLowerCase().includes(term)),
+      creations: creations.filter((c) => (cat === "Tous" || c.category === cat) && (matchTerm(c.name) || matchTerm(c.category) || matchTerm(c.description))),
+      artisanes: artisanes.filter((a) => matchTerm(a.name) || matchTerm(a.craft) || matchTerm(a.region)),
     };
-  }, [term]);
+  }, [term, cat, hasFilter]);
   const { isFavorite, toggleFavorite } = useStore();
 
   return (
@@ -65,21 +72,33 @@ function Home() {
         </div>
       </section>
 
-      {/* RECHERCHE FILTRÉE */}
+      {/* RECHERCHE FILTRÉE — entonnoir */}
       <section id="recherche" className="scroll-mt-24 bg-cream py-16">
         <div className="mx-auto max-w-5xl px-6">
           <div className="text-center">
             <span className="ornament text-xs tracking-brand">EXPLORER</span>
             <h2 className="mt-4 font-display text-4xl text-earth md:text-5xl">Trouvez une création, une artisane</h2>
           </div>
-          <div className="relative mx-auto mt-8 max-w-2xl">
-            <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-clay" />
-            <input
-              value={q}
-              onChange={(e) => setQ(e.target.value)}
-              placeholder="Tapis, bijoux, poterie, Fatima, Atlas..."
-              className="w-full rounded-sm border border-input bg-card py-4 pl-12 pr-4 text-base placeholder:text-muted-foreground focus:border-clay focus:outline-none"
-            />
+          <div className="mx-auto mt-8 flex max-w-3xl flex-col gap-3 sm:flex-row">
+            <div className="relative flex-1">
+              <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-clay" />
+              <input
+                value={q}
+                onChange={(e) => setQ(e.target.value)}
+                placeholder="Tapis, bijoux, poterie, Fatima, Atlas..."
+                className="w-full rounded-sm border border-input bg-card py-4 pl-12 pr-4 text-base placeholder:text-muted-foreground focus:border-clay focus:outline-none"
+              />
+            </div>
+            <div className="relative">
+              <Filter className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-clay" />
+              <select
+                value={cat}
+                onChange={(e) => setCat(e.target.value as typeof cat)}
+                className="h-full w-full appearance-none rounded-sm border border-input bg-card py-4 pl-11 pr-8 text-sm tracking-wide text-earth focus:border-clay focus:outline-none sm:w-48"
+              >
+                {categories.map((c) => <option key={c} value={c}>Filtrer : {c}</option>)}
+              </select>
+            </div>
           </div>
 
           {results && (
@@ -100,41 +119,46 @@ function Home() {
                   </div>
                 )}
               </div>
-              <div>
-                <h3 className="mb-4 text-xs tracking-brand text-muted-foreground">ARTISANES · {results.artisanes.length}</h3>
-                {results.artisanes.length === 0 ? (
-                  <p className="text-sm text-muted-foreground">Aucune artisane trouvée.</p>
-                ) : (
-                  <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-                    {results.artisanes.map((a) => (
-                      <Link key={a.id} to="/artisanes/$id" params={{ id: a.id }} className="group flex gap-3 bg-card p-3 hover:shadow-md">
-                        <img src={a.image} alt={a.name} width={120} height={120} loading="lazy" className="h-20 w-20 shrink-0 object-cover" />
-                        <div>
-                          <div className="font-display text-lg text-earth">{a.name}</div>
-                          <div className="text-xs text-muted-foreground">{a.craft}</div>
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
+              {cat === "Tous" && (
+                <div>
+                  <h3 className="mb-4 text-xs tracking-brand text-muted-foreground">ARTISANES · {results.artisanes.length}</h3>
+                  {results.artisanes.length === 0 ? (
+                    <p className="text-sm text-muted-foreground">Aucune artisane trouvée.</p>
+                  ) : (
+                    <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+                      {results.artisanes.map((a) => (
+                        <Link key={a.id} to="/artisanes/$id" params={{ id: a.id }} className="group flex gap-3 bg-card p-3 hover:shadow-md">
+                          <img src={a.image} alt={a.name} width={120} height={120} loading="lazy" className="h-20 w-20 shrink-0 object-cover" />
+                          <div>
+                            <div className="font-display text-lg text-earth">{a.name}</div>
+                            <div className="text-xs text-muted-foreground">{a.craft}</div>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           )}
         </div>
       </section>
 
-      {/* PILIERS — cliquables */}
+      {/* PILIERS — cliquables avec ornement amazigh */}
       <section className="bg-sand/40 py-20">
         <div className="mx-auto grid max-w-7xl gap-6 px-6 md:grid-cols-4">
           {pillars.map((c) => (
             <Link
               key={c.title}
               to={c.to}
-              className={`${c.bg} group relative aspect-[3/4] overflow-hidden rounded-sm p-6 transition-transform hover:-translate-y-1`}
+              className={`${c.bg} group relative flex aspect-[3/4] flex-col overflow-hidden rounded-sm p-6 transition-transform hover:-translate-y-1`}
             >
               <h3 className="font-display text-2xl leading-tight">{c.title}</h3>
               <p className="mt-3 text-sm opacity-80">{c.desc}</p>
-              <span className="absolute bottom-6 left-6 text-xs tracking-brand opacity-90 transition-opacity group-hover:opacity-100">DÉCOUVRIR →</span>
+              <div className="my-auto flex items-center justify-center py-6">
+                <AmazighOrnament className="w-32 opacity-70 transition-opacity group-hover:opacity-100" />
+              </div>
+              <span className="text-xs tracking-brand opacity-90 transition-opacity group-hover:opacity-100">DÉCOUVRIR →</span>
             </Link>
           ))}
         </div>
@@ -162,7 +186,7 @@ function Home() {
         </div>
       </section>
 
-      {/* CRÉATIONS PREVIEW — cliquables + favoris */}
+      {/* CRÉATIONS PREVIEW */}
       <section className="bg-honey/40 py-24">
         <div className="mx-auto max-w-7xl px-6">
           <div className="mb-12 flex flex-wrap items-end justify-between gap-4">
@@ -197,6 +221,29 @@ function Home() {
                 </article>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* STATISTIQUES — avant la bande marron */}
+      <section className="bg-sand/30 py-20">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="text-center">
+            <span className="ornament text-xs tracking-brand">EN CHIFFRES</span>
+            <h2 className="mt-4 font-display text-4xl text-earth md:text-5xl">Notre impact ensemble</h2>
+          </div>
+          <div className="mt-12 grid gap-8 md:grid-cols-3">
+            {[
+              { n: stats.artisanes, label: "Artisanes partenaires", sub: "à travers les vallées du Maroc" },
+              { n: stats.creations, label: "Créations uniques", sub: "au catalogue, faites main" },
+              { n: stats.ventes, label: "Pièces vendues", sub: "à des passionnés du monde entier" },
+            ].map((s) => (
+              <div key={s.label} className="rounded-sm border border-border bg-card p-8 text-center">
+                <div className="font-display text-6xl text-earth">{s.n.toLocaleString("fr-FR")}</div>
+                <div className="mt-3 text-xs tracking-brand text-clay">{s.label.toUpperCase()}</div>
+                <div className="mt-2 text-sm text-muted-foreground">{s.sub}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

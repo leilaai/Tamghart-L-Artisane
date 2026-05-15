@@ -1,10 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 const orders = [
-  { id: "CMD-2041", client: "Sophie M.", artisane: "Fatima Azuli", item: "Tapis sur mesure 2x3m", date: "12 mai", status: "En cours", color: "bg-honey text-earth" },
-  { id: "CMD-2040", client: "Karim B.", artisane: "Lalla Itto", item: "Châle brodé personnalisé", date: "10 mai", status: "Livrée", color: "bg-sand text-earth" },
-  { id: "CMD-2039", client: "Amina R.", artisane: "Yamina Tachfin", item: "Coussins kilim x4", date: "08 mai", status: "Validée", color: "bg-clay/30 text-earth" },
-  { id: "CMD-2038", client: "Léa T.", artisane: "Fatima Azuli", item: "Tapis Beni Ouarain", date: "05 mai", status: "En attente", color: "bg-destructive/15 text-destructive" },
+  { id: "CMD-2045", client: "Sophie Martin", artisane: "Fatima Azuli", item: "Tapis sur mesure 2x3m", date: "12 mai", status: "En cours", color: "bg-honey text-earth" },
+  { id: "CMD-2044", client: "Karim Benali", artisane: "Lalla Itto", item: "Châle brodé personnalisé", date: "10 mai", status: "Livrée", color: "bg-sand text-earth" },
+  { id: "CMD-2043", client: "Emma Schneider", artisane: "Khadija Amzil", item: "Parure argent corail", date: "09 mai", status: "Validée", color: "bg-clay/30 text-earth" },
+  { id: "CMD-2042", client: "Yassine El Idrissi", artisane: "Tamou Bouzid", item: "Vase Ourika peint main", date: "08 mai", status: "En cours", color: "bg-honey text-earth" },
+  { id: "CMD-2041", client: "Olivia Romano", artisane: "Yamina Tachfin", item: "Coussins kilim x4", date: "07 mai", status: "Validée", color: "bg-clay/30 text-earth" },
+  { id: "CMD-2040", client: "Hiroshi Tanaka", artisane: "Fatima Azuli", item: "Tapis Beni Ouarain 1.5x2m", date: "05 mai", status: "Livrée", color: "bg-sand text-earth" },
+  { id: "CMD-2039", client: "Aïcha Bennani", artisane: "Lalla Itto", item: "Caftan brodé sur mesure", date: "04 mai", status: "En cours", color: "bg-honey text-earth" },
+  { id: "CMD-2038", client: "Lucas Fernández", artisane: "Khadija Amzil", item: "Bracelet manchette argent", date: "02 mai", status: "En attente", color: "bg-destructive/15 text-destructive" },
+  { id: "CMD-2037", client: "Nora El Mansouri", artisane: "Tamou Bouzid", item: "Service à thé poterie", date: "01 mai", status: "Livrée", color: "bg-sand text-earth" },
+  { id: "CMD-2036", client: "Charlotte Dubois", artisane: "Yamina Tachfin", item: "Tapis Azilal coloré", date: "29 avr.", status: "Validée", color: "bg-clay/30 text-earth" },
 ];
 
 export const Route = createFileRoute("/admin/commandes")({
