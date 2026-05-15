@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { creations } from "@/lib/data";
 import { useStore } from "@/lib/store";
 import { ShoppingBag, X } from "lucide-react";
+import { PaymentDialog } from "@/components/PaymentDialog";
 
 export const Route = createFileRoute("/panier")({
   head: () => ({ meta: [{ title: "Mon panier — Tamghart" }] }),
@@ -60,9 +61,15 @@ function PanierPage() {
             <div className="mt-6 flex justify-between border-t border-border pt-4 font-display text-xl text-earth">
               <span>Total</span><span>{total} MAD</span>
             </div>
-            <button className="mt-6 w-full rounded-sm bg-earth px-6 py-3 text-sm tracking-wide text-cream hover:bg-earth/90">
-              Passer commande
-            </button>
+            <PaymentDialog
+              amount={total}
+              title="Finaliser la commande"
+              trigger={
+                <button className="mt-6 w-full rounded-sm bg-earth px-6 py-3 text-sm tracking-wide text-cream hover:bg-earth/90">
+                  Passer commande
+                </button>
+              }
+            />
           </aside>
         </div>
       )}
