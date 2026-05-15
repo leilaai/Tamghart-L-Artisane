@@ -35,8 +35,8 @@ function AdminLayout() {
             <Link
               key={n.to}
               to={n.to}
-              className="flex items-center gap-3 rounded-sm px-3 py-2 text-foreground/80 hover:bg-sand"
-              activeProps={{ className: "bg-earth text-cream hover:bg-earth" }}
+              className="flex items-center gap-3 rounded-sm border-l-2 border-transparent px-3 py-2 text-foreground/80 transition-colors hover:bg-sand/60 hover:text-earth"
+              activeProps={{ className: "border-earth bg-honey/40 text-earth font-medium" }}
             >
               <n.icon className="h-4 w-4" /> {n.label}
             </Link>
