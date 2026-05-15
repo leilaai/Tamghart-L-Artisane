@@ -12,6 +12,7 @@ import appCss from "../styles.css?url";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { StoreProvider } from "@/lib/store";
+import { I18nProvider } from "@/lib/i18n";
 
 function NotFoundComponent() {
   return (
@@ -116,15 +117,18 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <StoreProvider>
-        <div className="flex min-h-screen flex-col">
-          <SiteHeader />
-          <main className="flex-1">
-            <Outlet />
-          </main>
-          <SiteFooter />
-        </div>
-      </StoreProvider>
+      <I18nProvider>
+        <StoreProvider>
+          <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-2 focus:top-2 focus:z-50 focus:rounded focus:bg-earth focus:px-3 focus:py-2 focus:text-cream">Aller au contenu</a>
+          <div className="flex min-h-screen flex-col">
+            <SiteHeader />
+            <main id="main" className="flex-1">
+              <Outlet />
+            </main>
+            <SiteFooter />
+          </div>
+        </StoreProvider>
+      </I18nProvider>
     </QueryClientProvider>
   );
 }

@@ -1,23 +1,9 @@
 import { Link } from "@tanstack/react-router";
 import logo from "@/assets/logo-tamghart.png";
-import { Search, Heart, ShoppingBag, Globe } from "lucide-react";
+import { Search, Heart, ShoppingBag, Menu, X } from "lucide-react";
 import { useStore } from "@/lib/store";
-import { useEffect, useState } from "react";
-
-const nav = [
-  { to: "/", label: "Accueil" },
-  { to: "/artisanes", label: "Artisanes" },
-  { to: "/creations", label: "Créations" },
-  { to: "/galerie", label: "Culture" },
-  { to: "/contact", label: "Contact" },
-];
-
-const langs = [
-  { code: "fr", label: "Français" },
-  { code: "en", label: "English" },
-  { code: "ar", label: "العربية" },
-  { code: "tif", label: "ⵜⵉⴼⵉⵏⴰⵖ" },
-];
+import { useState } from "react";
+import { useI18n, LANG_LABELS, type Lang } from "@/lib/i18n";
 
 function Badge({ count }: { count: number }) {
   if (!count) return null;
@@ -29,76 +15,124 @@ function Badge({ count }: { count: number }) {
 }
 
 function LangSwitcher() {
-  const [lang, setLang] = useState("fr");
-  useEffect(() => {
-    const saved = typeof window !== "undefined" ? localStorage.getItem("tamghart_lang") : null;
-    if (saved) setLang(saved);
-  }, []);
+  const { lang, setLang } = useI18n();
   return (
-    <div className="relative inline-flex items-center gap-1 rounded-sm border border-border bg-card px-2 py-1">
-      <Globe className="h-3.5 w-3.5 text-clay" />
-      <select
-        aria-label="Langue"
-        value={lang}
-        onChange={(e) => {
-          const v = e.target.value;
-          setLang(v);
-          localStorage.setItem("tamghart_lang", v);
-          document.documentElement.lang = v === "tif" ? "ber" : v;
-          document.documentElement.dir = v === "ar" ? "rtl" : "ltr";
-        }}
-        className="cursor-pointer bg-transparent text-xs tracking-wide text-earth focus:outline-none"
-      >
-        {langs.map((l) => <option key={l.code} value={l.code}>{l.label}</option>)}
-      </select>
+    <div role="group" aria-label="Language" className="inline-flex items-center gap-0.5 rounded-sm border border-border bg-card p-0.5">
+      {LANG_LABELS.map((l) => {
+        const active = lang === l.code;
+        return (
+          <button
+            key={l.code}
+            onClick={() => setLang(l.code as Lang)}
+            aria-label={l.full}
+            aria-pressed={active}
+            className={`rounded-[2px] px-2 py-1 text-xs font-medium tracking-wide transition-colors ${
+              active ? "bg-earth text-cream" : "text-earth/70 hover:bg-sand"
+            }`}
+          >
+            {l.short}
+          </button>
+        );
+      })}
     </div>
+  );
+}
+
+function Brand() {
+  return (
+    <Link to="/" className="flex items-center gap-3 sm:gap-4" aria-label="Tamghart l'Artisane — Accueil">
+      <img src={logo} alt="" width={84} height={84} className="h-16 w-16 object-contain sm:h-20 sm:w-20" />
+      <div className="flex flex-col items-center leading-none">
+        <span className="font-display text-2xl font-semibold tracking-[0.12em] text-earth sm:text-3xl">TAMGHART</span>
+        <span className="mt-1 flex items-center gap-2 font-display text-[0.65rem] tracking-[0.35em] text-clay sm:text-xs">
+          <span aria-hidden className="text-clay">✦</span>
+          L'ARTISANE
+          <span aria-hidden className="text-clay">✦</span>
+        </span>
+        <span className="mt-1 text-[0.65rem] tracking-[0.25em] text-clay sm:text-xs" aria-hidden>
+          ⵜⴰⵎⵖⴰⵔⵜ ⵍⴰⵕⵟⵉⵙⴰⵏ
+        </span>
+      </div>
+    </Link>
   );
 }
 
 export function SiteHeader() {
   const { favorites, cart } = useStore();
+  const { t } = useI18n();
+  const [open, setOpen] = useState(false);
+
+  const nav = [
+    { to: "/" as const, label: t("nav.home"), exact: true },
+    { to: "/artisanes" as const, label: t("nav.artisans") },
+    { to: "/creations" as const, label: t("nav.creations") },
+    { to: "/galerie" as const, label: t("nav.culture") },
+    { to: "/contact" as const, label: t("nav.contact") },
+  ];
+
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-cream/85 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-3">
-        <div className="flex items-center gap-4">
-          <Link to="/" className="flex items-center gap-3">
-            <img src={logo} alt="Tamghart" width={52} height={52} className="h-12 w-12 object-contain" />
-            <div className="leading-none">
-              <div className="font-display text-2xl font-semibold tracking-[0.08em] text-earth">TAMGHART</div>
-              <div className="ornament mt-1 justify-center font-display text-[0.7rem] tracking-[0.3em] text-clay">L'ARTISANE</div>
-            </div>
-          </Link>
-          <LangSwitcher />
-        </div>
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+        <Brand />
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav aria-label="Principal" className="hidden items-center gap-7 lg:flex">
           {nav.map((n) => (
             <Link
               key={n.to}
               to={n.to}
-              className="text-sm tracking-wide text-foreground/80 transition-colors hover:text-accent"
+              className="text-sm tracking-wide text-foreground/80 transition-colors hover:text-accent focus-visible:text-accent focus-visible:outline-2 focus-visible:outline-offset-2"
               activeProps={{ className: "text-accent font-medium" }}
-              activeOptions={{ exact: n.to === "/" }}
+              activeOptions={{ exact: n.exact }}
             >
               {n.label}
             </Link>
           ))}
         </nav>
 
-        <div className="flex items-center gap-5 text-foreground/70">
-          <Link to="/" hash="recherche" aria-label="Recherche" className="transition-colors hover:text-accent">
+        <div className="flex items-center gap-3 text-foreground/70 sm:gap-4">
+          <LangSwitcher />
+          <Link to="/" hash="recherche" aria-label={t("nav.search")} className="hidden transition-colors hover:text-accent sm:inline-flex">
             <Search className="h-5 w-5" />
           </Link>
-          <Link to="/favoris" aria-label="Favoris" className="relative transition-colors hover:text-accent">
+          <Link to="/favoris" aria-label={t("nav.favorites")} className="relative transition-colors hover:text-accent">
             <Heart className="h-5 w-5" />
             <Badge count={favorites.length} />
           </Link>
-          <Link to="/panier" aria-label="Panier" className="relative transition-colors hover:text-accent">
+          <Link to="/panier" aria-label={t("nav.cart")} className="relative transition-colors hover:text-accent">
             <ShoppingBag className="h-5 w-5" />
             <Badge count={cart.length} />
           </Link>
+          <button
+            type="button"
+            aria-label="Menu"
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-sm hover:bg-sand lg:hidden"
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </div>
       </div>
+
+      {open && (
+        <nav aria-label="Mobile" className="border-t border-border/60 bg-cream lg:hidden">
+          <ul className="mx-auto flex max-w-7xl flex-col px-4 py-2 sm:px-6">
+            {nav.map((n) => (
+              <li key={n.to}>
+                <Link
+                  to={n.to}
+                  onClick={() => setOpen(false)}
+                  className="block py-3 text-sm tracking-wide text-earth hover:text-accent"
+                  activeProps={{ className: "text-accent font-medium" }}
+                  activeOptions={{ exact: n.exact }}
+                >
+                  {n.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
     </header>
   );
 }
