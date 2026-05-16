@@ -3,6 +3,7 @@ import { creations, artisanes } from "@/lib/data";
 import { useState } from "react";
 import { useStore } from "@/lib/store";
 import { Heart } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
 
 const categories = ["Tout", "Tapis", "Bijoux", "Broderie", "Poterie"] as const;
 
@@ -10,7 +11,7 @@ export const Route = createFileRoute("/creations/")({
   head: () => ({
     meta: [
       { title: "Catalogue des créations — Tamghart" },
-      { name: "description", content: "Tapis, bijoux, broderies, poteries — pièces uniques faites main par les femmes amazighes." },
+      { name: "description", content: "Tapis, bijoux, broderies, poteries — pièces uniques faites main." },
     ],
   }),
   component: CreationsPage,
@@ -20,13 +21,13 @@ function CreationsPage() {
   const [filter, setFilter] = useState<typeof categories[number]>("Tout");
   const list = filter === "Tout" ? creations : creations.filter((c) => c.category === filter);
   const { isFavorite, toggleFavorite } = useStore();
+  const { t, ti } = useI18n();
 
   return (
     <div className="mx-auto max-w-7xl px-6 py-20">
       <div className="mb-10 max-w-2xl">
-        <span className="ornament text-xs tracking-brand">COLLECTION</span>
-        <h1 className="mt-4 font-display text-5xl text-earth md:text-6xl">Catalogue des créations</h1>
-        <p className="mt-4 text-muted-foreground">Filtrez par type d'artisanat. Chaque pièce est unique et faite main.</p>
+        <span className="ornament text-xs tracking-brand">{t("creations.kicker")}</span>
+        <h1 className="mt-4 font-display text-5xl text-earth md:text-6xl">{t("creations.title")}</h1>
       </div>
 
       <div className="mb-10 flex flex-wrap gap-2">
@@ -38,7 +39,7 @@ function CreationsPage() {
               filter === c ? "bg-earth text-cream" : "bg-sand text-earth hover:bg-clay/30"
             }`}
           >
-            {c.toUpperCase()}
+            {ti("cat", c).toUpperCase()}
           </button>
         ))}
       </div>
@@ -60,18 +61,17 @@ function CreationsPage() {
                 <div className="relative overflow-hidden">
                   <img src={c.image} alt={c.name} width={800} height={800} loading="lazy" className="aspect-square w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   <span className={`absolute left-3 top-3 rounded-full px-3 py-1 text-[0.65rem] tracking-brand ${c.available ? "bg-honey text-earth" : "bg-clay text-cream"}`}>
-                    {c.available ? "DISPONIBLE" : "SUR COMMANDE"}
+                    {ti("status", c.available ? "DISPONIBLE" : "SUR COMMANDE")}
                   </span>
                 </div>
                 <div className="pt-5">
-                  <h3 className="font-display text-xl text-earth">{c.name}</h3>
+                  <h3 className="font-display text-xl text-earth">{ti("name", c.name)}</h3>
                   <p className="text-xs text-muted-foreground">
-                    {c.category}
-                    {a && <> · par <span className="text-clay">{a.name}</span></>}
+                    {ti("cat", c.category)}
+                    {a && <> · <span className="text-clay">{a.name}</span></>}
                   </p>
                   <div className="mt-4 flex items-center justify-between">
                     <span className="font-display text-xl text-accent">{c.price} MAD</span>
-                    <span className="rounded-sm bg-earth px-4 py-2 text-xs tracking-brand text-cream">VOIR LE DÉTAIL</span>
                   </div>
                 </div>
               </Link>
