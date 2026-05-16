@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import hero from "@/assets/hero-artisane.jpg";
 import textile from "@/assets/textile-amazigh.jpg";
 import { artisanes, creations, stats } from "@/lib/data";
-import { ArrowRight, Search, Heart, Filter, MapPin } from "lucide-react";
+import { ArrowRight, Search, Heart, Filter } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useStore } from "@/lib/store";
 import { AmazighOrnament } from "@/components/AmazighOrnament";
@@ -18,19 +18,10 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-const regions = [
-  { name: "Rif", note: "Nord, montagnes côtières" },
-  { name: "Moyen Atlas", note: "Cèdres et plateaux" },
-  { name: "Haut Atlas", note: "Sommets et villages" },
-  { name: "Anti-Atlas", note: "Argan et oasis" },
-  { name: "Souss", note: "Plaines du Sud-Ouest" },
-  { name: "Drâa-Tafilalet", note: "Vallées et palmeraies" },
-];
-
 const categories = ["Tous", "Tapis", "Bijoux", "Broderie", "Poterie"] as const;
 
 function Home() {
-  const { t } = useI18n();
+  const { t, ti } = useI18n();
   const [q, setQ] = useState("");
   const [cat, setCat] = useState<(typeof categories)[number]>("Tous");
   const term = q.toLowerCase().trim();

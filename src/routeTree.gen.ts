@@ -10,10 +10,16 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RechercheRouteImport } from './routes/recherche'
+import { Route as QuiSommesNousRouteImport } from './routes/qui-sommes-nous'
 import { Route as PanierRouteImport } from './routes/panier'
 import { Route as FavorisRouteImport } from './routes/favoris'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as EntretienRouteImport } from './routes/entretien'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as ConfidentialiteRouteImport } from './routes/confidentialite'
+import { Route as ConditionsGeneralesRouteImport } from './routes/conditions-generales'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AProposRouteImport } from './routes/a-propos'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as GalerieIndexRouteImport } from './routes/galerie.index'
 import { Route as CreationsIndexRouteImport } from './routes/creations.index'
@@ -31,6 +37,11 @@ const RechercheRoute = RechercheRouteImport.update({
   path: '/recherche',
   getParentRoute: () => rootRouteImport,
 } as any)
+const QuiSommesNousRoute = QuiSommesNousRouteImport.update({
+  id: '/qui-sommes-nous',
+  path: '/qui-sommes-nous',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PanierRoute = PanierRouteImport.update({
   id: '/panier',
   path: '/panier',
@@ -41,14 +52,39 @@ const FavorisRoute = FavorisRouteImport.update({
   path: '/favoris',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EntretienRoute = EntretienRouteImport.update({
+  id: '/entretien',
+  path: '/entretien',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ConfidentialiteRoute = ConfidentialiteRouteImport.update({
+  id: '/confidentialite',
+  path: '/confidentialite',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConditionsGeneralesRoute = ConditionsGeneralesRouteImport.update({
+  id: '/conditions-generales',
+  path: '/conditions-generales',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AProposRoute = AProposRouteImport.update({
+  id: '/a-propos',
+  path: '/a-propos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -109,10 +145,16 @@ const AdminArtisanesRoute = AdminArtisanesRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/a-propos': typeof AProposRoute
   '/admin': typeof AdminRouteWithChildren
+  '/conditions-generales': typeof ConditionsGeneralesRoute
+  '/confidentialite': typeof ConfidentialiteRoute
   '/contact': typeof ContactRoute
+  '/entretien': typeof EntretienRoute
+  '/faq': typeof FaqRoute
   '/favoris': typeof FavorisRoute
   '/panier': typeof PanierRoute
+  '/qui-sommes-nous': typeof QuiSommesNousRoute
   '/recherche': typeof RechercheRoute
   '/admin/artisanes': typeof AdminArtisanesRoute
   '/admin/commandes': typeof AdminCommandesRoute
@@ -127,10 +169,16 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/a-propos': typeof AProposRoute
   '/admin': typeof AdminRouteWithChildren
+  '/conditions-generales': typeof ConditionsGeneralesRoute
+  '/confidentialite': typeof ConfidentialiteRoute
   '/contact': typeof ContactRoute
+  '/entretien': typeof EntretienRoute
+  '/faq': typeof FaqRoute
   '/favoris': typeof FavorisRoute
   '/panier': typeof PanierRoute
+  '/qui-sommes-nous': typeof QuiSommesNousRoute
   '/recherche': typeof RechercheRoute
   '/admin/artisanes': typeof AdminArtisanesRoute
   '/admin/commandes': typeof AdminCommandesRoute
@@ -146,10 +194,16 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/a-propos': typeof AProposRoute
   '/admin': typeof AdminRouteWithChildren
+  '/conditions-generales': typeof ConditionsGeneralesRoute
+  '/confidentialite': typeof ConfidentialiteRoute
   '/contact': typeof ContactRoute
+  '/entretien': typeof EntretienRoute
+  '/faq': typeof FaqRoute
   '/favoris': typeof FavorisRoute
   '/panier': typeof PanierRoute
+  '/qui-sommes-nous': typeof QuiSommesNousRoute
   '/recherche': typeof RechercheRoute
   '/admin/artisanes': typeof AdminArtisanesRoute
   '/admin/commandes': typeof AdminCommandesRoute
@@ -166,10 +220,16 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/a-propos'
     | '/admin'
+    | '/conditions-generales'
+    | '/confidentialite'
     | '/contact'
+    | '/entretien'
+    | '/faq'
     | '/favoris'
     | '/panier'
+    | '/qui-sommes-nous'
     | '/recherche'
     | '/admin/artisanes'
     | '/admin/commandes'
@@ -184,10 +244,16 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/a-propos'
     | '/admin'
+    | '/conditions-generales'
+    | '/confidentialite'
     | '/contact'
+    | '/entretien'
+    | '/faq'
     | '/favoris'
     | '/panier'
+    | '/qui-sommes-nous'
     | '/recherche'
     | '/admin/artisanes'
     | '/admin/commandes'
@@ -202,10 +268,16 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/a-propos'
     | '/admin'
+    | '/conditions-generales'
+    | '/confidentialite'
     | '/contact'
+    | '/entretien'
+    | '/faq'
     | '/favoris'
     | '/panier'
+    | '/qui-sommes-nous'
     | '/recherche'
     | '/admin/artisanes'
     | '/admin/commandes'
@@ -221,10 +293,16 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AProposRoute: typeof AProposRoute
   AdminRoute: typeof AdminRouteWithChildren
+  ConditionsGeneralesRoute: typeof ConditionsGeneralesRoute
+  ConfidentialiteRoute: typeof ConfidentialiteRoute
   ContactRoute: typeof ContactRoute
+  EntretienRoute: typeof EntretienRoute
+  FaqRoute: typeof FaqRoute
   FavorisRoute: typeof FavorisRoute
   PanierRoute: typeof PanierRoute
+  QuiSommesNousRoute: typeof QuiSommesNousRoute
   RechercheRoute: typeof RechercheRoute
   ArtisanesIdRoute: typeof ArtisanesIdRoute
   CreationsIdRoute: typeof CreationsIdRoute
@@ -243,6 +321,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RechercheRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/qui-sommes-nous': {
+      id: '/qui-sommes-nous'
+      path: '/qui-sommes-nous'
+      fullPath: '/qui-sommes-nous'
+      preLoaderRoute: typeof QuiSommesNousRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/panier': {
       id: '/panier'
       path: '/panier'
@@ -257,6 +342,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FavorisRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/entretien': {
+      id: '/entretien'
+      path: '/entretien'
+      fullPath: '/entretien'
+      preLoaderRoute: typeof EntretienRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
@@ -264,11 +363,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/confidentialite': {
+      id: '/confidentialite'
+      path: '/confidentialite'
+      fullPath: '/confidentialite'
+      preLoaderRoute: typeof ConfidentialiteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/conditions-generales': {
+      id: '/conditions-generales'
+      path: '/conditions-generales'
+      fullPath: '/conditions-generales'
+      preLoaderRoute: typeof ConditionsGeneralesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin': {
       id: '/admin'
       path: '/admin'
       fullPath: '/admin'
       preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/a-propos': {
+      id: '/a-propos'
+      path: '/a-propos'
+      fullPath: '/a-propos'
+      preLoaderRoute: typeof AProposRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -369,10 +489,16 @@ const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AProposRoute: AProposRoute,
   AdminRoute: AdminRouteWithChildren,
+  ConditionsGeneralesRoute: ConditionsGeneralesRoute,
+  ConfidentialiteRoute: ConfidentialiteRoute,
   ContactRoute: ContactRoute,
+  EntretienRoute: EntretienRoute,
+  FaqRoute: FaqRoute,
   FavorisRoute: FavorisRoute,
   PanierRoute: PanierRoute,
+  QuiSommesNousRoute: QuiSommesNousRoute,
   RechercheRoute: RechercheRoute,
   ArtisanesIdRoute: ArtisanesIdRoute,
   CreationsIdRoute: CreationsIdRoute,
@@ -384,13 +510,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
