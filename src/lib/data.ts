@@ -171,6 +171,39 @@ export const articles: Article[] = [
       "Chaque atelier a sa signature : à Ourika, ce sont les losanges et les peignes ; au Rif, les triangles et les croix ; au Sud, les motifs floraux stylisés.",
     ],
   },
+  {
+    slug: "tatouages-memoire",
+    title: "Les tatouages, mémoire de la peau",
+    excerpt: "Avant le henné des mariages, les femmes amazighes portaient sur le menton, le front, les mains, les tatouages de leur tribu.",
+    image: collection,
+    content: [
+      "Le tatouage amazigh — ticherrad — était à la fois rite de passage, marqueur d'identité tribale, et amulette protectrice.",
+      "Réalisés à l'aiguille et à la suie de bois, les motifs disaient le statut, l'âge, l'origine. Une croix sur le front signalait souvent une femme mariée ; les lignes sur le menton, une jeune fille en âge de l'être.",
+      "Aujourd'hui presque disparu chez les jeunes générations, le tatouage survit dans les bijoux, les broderies, les tapis — autant de prolongements graphiques du même langage.",
+    ],
+  },
+  {
+    slug: "henne-mariages",
+    title: "Le henné, art éphémère des grands jours",
+    excerpt: "Mariages, fêtes religieuses, naissances : le henné dessine sur la peau les motifs sacrés de la culture amazighe.",
+    image: textile,
+    content: [
+      "La nuit du henné, deux jours avant le mariage, est un rituel féminin essentiel. Les femmes de la famille se rassemblent et la mariée reçoit les premiers motifs sur ses mains et ses pieds.",
+      "Les dessins varient selon les régions : à Ouarzazate, des étoiles ; au Souss, des losanges et chevrons ; dans le Rif, des motifs floraux délicats.",
+      "Le henné n'est jamais purement décoratif : il protège du mauvais œil, attire la fertilité et inscrit la femme dans la lignée des aïeules.",
+    ],
+  },
+  {
+    slug: "chant-ahidous",
+    title: "L'ahidous, le chant qui rassemble",
+    excerpt: "Bien plus qu'une danse, l'ahidous est la voix collective des villages du Moyen et du Haut Atlas.",
+    image: imgChale,
+    content: [
+      "Dans les villages de l'Atlas, les soirs de fête, hommes et femmes forment un cercle. Au son du bendir, ils chantent à l'unisson — c'est l'ahidous.",
+      "Les paroles, improvisées sur le moment, parlent d'amour, de saisons, de politique, de souffrance. Chaque village a son répertoire et ses meilleurs voix.",
+      "Inscrit au patrimoine immatériel de l'UNESCO, l'ahidous reste l'un des rares moments où voix masculines et féminines s'entrelacent à égalité.",
+    ],
+  },
 ];
 
 export const stats = {

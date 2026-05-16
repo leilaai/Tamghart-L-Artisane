@@ -38,21 +38,36 @@ function LangSwitcher() {
   );
 }
 
-function Brand() {
+export function BrandBlock({ size = "md" }: { size?: "sm" | "md" }) {
+  const isSm = size === "sm";
   return (
-    <Link to="/" className="flex items-center gap-3 sm:gap-4" aria-label="Tamghart l'Artisane — Accueil">
-      <img src={logo} alt="" width={84} height={84} className="h-16 w-16 object-contain sm:h-20 sm:w-20" />
+    <div className="flex items-center gap-3 sm:gap-4">
+      <img
+        src={logo}
+        alt=""
+        width={84}
+        height={84}
+        className={isSm ? "h-12 w-12 object-contain" : "h-16 w-16 object-contain sm:h-20 sm:w-20"}
+      />
       <div className="flex flex-col items-center leading-none">
-        <span className="font-display text-2xl font-semibold tracking-[0.12em] text-earth sm:text-3xl">TAMGHART</span>
-        <span className="mt-1 flex items-center gap-2 font-display text-[0.65rem] tracking-[0.35em] text-clay sm:text-xs">
-          <span aria-hidden className="text-clay">✦</span>
+        <span className={`font-display font-semibold tracking-[0.12em] text-earth ${isSm ? "text-xl" : "text-2xl sm:text-3xl"}`}>TAMGHART</span>
+        <span className={`mt-1 flex items-center gap-2 font-display tracking-[0.35em] text-clay ${isSm ? "text-[0.6rem]" : "text-[0.65rem] sm:text-xs"}`}>
+          <span aria-hidden>✦</span>
           L'ARTISANE
-          <span aria-hidden className="text-clay">✦</span>
+          <span aria-hidden>✦</span>
         </span>
-        <span className="mt-1 text-[0.65rem] tracking-[0.25em] text-clay sm:text-xs" aria-hidden>
+        <span className={`mt-1 tracking-[0.25em] text-clay ${isSm ? "text-[0.6rem]" : "text-[0.65rem] sm:text-xs"}`} aria-hidden>
           ⵜⴰⵎⵖⴰⵔⵜ ⵍⴰⵕⵟⵉⵙⴰⵏ
         </span>
       </div>
+    </div>
+  );
+}
+
+function Brand() {
+  return (
+    <Link to="/" className="flex items-center gap-3 sm:gap-4" aria-label="Tamghart l'Artisane — Accueil">
+      <BrandBlock />
     </Link>
   );
 }
@@ -67,6 +82,7 @@ export function SiteHeader() {
     { to: "/artisanes" as const, label: t("nav.artisans") },
     { to: "/creations" as const, label: t("nav.creations") },
     { to: "/galerie" as const, label: t("nav.culture") },
+    { to: "/a-propos" as const, label: t("nav.about") },
     { to: "/contact" as const, label: t("nav.contact") },
   ];
 
@@ -75,7 +91,7 @@ export function SiteHeader() {
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
         <Brand />
 
-        <nav aria-label="Principal" className="hidden items-center gap-7 lg:flex">
+        <nav aria-label="Principal" className="hidden items-center gap-6 lg:flex">
           {nav.map((n) => (
             <Link
               key={n.to}
