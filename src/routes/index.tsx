@@ -74,26 +74,6 @@ function Home() {
         </div>
       </section>
 
-      {/* RÉGIONS AMAZIGHES — comble le vide entre hero et piliers */}
-      <section aria-labelledby="regions-title" className="border-y border-border/50 bg-sand/30 py-14">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="mb-8 text-center">
-            <span className="ornament text-xs tracking-brand">{t("regions.kicker")}</span>
-            <h2 id="regions-title" className="mt-3 font-display text-3xl text-earth md:text-4xl">{t("regions.title")}</h2>
-            <p className="mx-auto mt-3 max-w-xl text-sm text-muted-foreground">{t("regions.desc")}</p>
-          </div>
-          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-            {regions.map((r) => (
-              <li key={r.name} className="group flex flex-col items-center rounded-sm border border-border/60 bg-card px-3 py-4 text-center transition-all hover:-translate-y-0.5 hover:border-clay">
-                <MapPin className="h-4 w-4 text-clay" aria-hidden />
-                <div className="mt-2 font-display text-lg text-earth">{r.name}</div>
-                <div className="text-[0.7rem] text-muted-foreground">{r.note}</div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
       {/* RECHERCHE FILTRÉE — entonnoir */}
       <section id="recherche" aria-labelledby="search-title" className="scroll-mt-24 bg-cream py-16">
         <div className="mx-auto max-w-5xl px-4 sm:px-6">
