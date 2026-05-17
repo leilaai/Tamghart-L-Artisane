@@ -48,11 +48,26 @@ function CreationDetail() {
 
         <div>
           <span className="ornament text-xs tracking-brand">{c.category.toUpperCase()}</span>
-          <h1 className="mt-4 font-display text-5xl text-earth">{c.name}</h1>
+          <h1 className="mt-4 font-display text-4xl text-earth sm:text-5xl">{c.name}</h1>
           {a && (
-            <p className="mt-2 text-clay">
-              par <Link to="/artisanes/$id" params={{ id: a.id }} className="hover:underline">{a.name}</Link> · {a.region}
-            </p>
+            <Link
+              to="/artisanes/$id"
+              params={{ id: a.id }}
+              className="mt-4 flex items-center gap-3 rounded-sm border border-border bg-sand/40 p-3 transition-colors hover:bg-sand"
+            >
+              <img
+                src={a.image}
+                alt={a.name}
+                width={96}
+                height={96}
+                className="h-14 w-14 shrink-0 rounded-full object-cover"
+              />
+              <div className="min-w-0">
+                <div className="text-[0.65rem] tracking-brand text-clay">CRÉÉ PAR</div>
+                <div className="font-display text-lg text-earth">{a.name}</div>
+                <div className="text-xs text-muted-foreground truncate">{a.craft} · {a.region}</div>
+              </div>
+            </Link>
           )}
           {reviews.length > 0 && (
             <div className="mt-3 flex items-center gap-2">
