@@ -131,23 +131,45 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <nav aria-label="Mobile" className="border-t border-border/60 bg-cream lg:hidden">
-          <ul className="mx-auto flex max-w-7xl flex-col px-4 py-2 sm:px-6">
-            {nav.map((n) => (
-              <li key={n.to}>
-                <Link
-                  to={n.to}
-                  onClick={() => setOpen(false)}
-                  className="block py-3 text-sm tracking-wide text-earth hover:text-accent"
-                  activeProps={{ className: "text-accent font-medium" }}
-                  activeOptions={{ exact: n.exact }}
-                >
-                  {n.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <>
+          <button
+            type="button"
+            aria-label="Fermer le menu"
+            onClick={() => setOpen(false)}
+            className="fixed inset-0 z-40 bg-earth/40 backdrop-blur-sm lg:hidden"
+          />
+          <nav
+            aria-label="Mobile"
+            className="fixed right-0 top-0 z-50 h-full w-72 max-w-[85vw] border-l border-border bg-cream shadow-2xl lg:hidden"
+          >
+            <div className="flex items-center justify-between border-b border-border/60 px-4 py-3">
+              <span className="text-xs tracking-brand text-earth/70">MENU</span>
+              <button
+                type="button"
+                aria-label="Fermer"
+                onClick={() => setOpen(false)}
+                className="inline-flex h-9 w-9 items-center justify-center rounded-sm hover:bg-sand"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            <ul className="flex flex-col px-4 py-2">
+              {nav.map((n) => (
+                <li key={n.to}>
+                  <Link
+                    to={n.to}
+                    onClick={() => setOpen(false)}
+                    className="block py-3 text-sm tracking-wide text-earth hover:text-accent"
+                    activeProps={{ className: "text-accent font-medium" }}
+                    activeOptions={{ exact: n.exact }}
+                  >
+                    {n.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </>
       )}
     </header>
   );
