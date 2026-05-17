@@ -16,19 +16,22 @@ import { I18nProvider } from "@/lib/i18n";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-cream px-4 py-20 text-center">
-      <span className="ornament text-xs tracking-brand">ⵜⴰⵎⵖⴰⵔⵜ</span>
-      <h1 className="mt-6 font-display text-7xl text-earth sm:text-8xl">404</h1>
-      <h2 className="mt-4 font-display text-2xl text-earth">Page introuvable</h2>
-      <p className="mt-3 max-w-md text-sm text-muted-foreground">
-        Cette page n'existe pas ou a été déplacée. Retournez à l'accueil pour continuer votre voyage.
-      </p>
-      <Link
-        to="/"
-        className="mt-8 inline-flex items-center justify-center rounded-sm bg-earth px-6 py-3 text-sm tracking-brand text-cream transition-colors hover:bg-earth/90"
-      >
-        RETOUR À L'ACCUEIL
-      </Link>
+    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+      <div className="max-w-md text-center">
+        <h1 className="text-7xl font-bold text-foreground">404</h1>
+        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
+        <p className="mt-2 text-sm text-muted-foreground">
+          The page you're looking for doesn't exist or has been moved.
+        </p>
+        <div className="mt-6">
+          <Link
+            to="/"
+            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+          >
+            Go home
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }
@@ -38,25 +41,31 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   const router = useRouter();
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-cream px-4 py-20 text-center">
-      <span className="ornament text-xs tracking-brand">ⵜⴰⵎⵖⴰⵔⵜ</span>
-      <h1 className="mt-6 font-display text-5xl text-earth sm:text-6xl">Oups…</h1>
-      <p className="mt-3 max-w-md text-sm text-muted-foreground">
-        Une erreur est survenue. Vous pouvez réessayer ou revenir à l'accueil.
-      </p>
-      <div className="mt-8 flex flex-wrap justify-center gap-3">
-        <button
-          onClick={() => { router.invalidate(); reset(); }}
-          className="rounded-sm bg-earth px-6 py-3 text-sm tracking-brand text-cream transition-colors hover:bg-earth/90"
-        >
-          RÉESSAYER
-        </button>
-        <a
-          href="/"
-          className="rounded-sm border border-earth/30 px-6 py-3 text-sm tracking-brand text-earth transition-colors hover:bg-sand"
-        >
-          ACCUEIL
-        </a>
+    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+      <div className="max-w-md text-center">
+        <h1 className="text-xl font-semibold tracking-tight text-foreground">
+          This page didn't load
+        </h1>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Something went wrong on our end. You can try refreshing or head back home.
+        </p>
+        <div className="mt-6 flex flex-wrap justify-center gap-2">
+          <button
+            onClick={() => {
+              router.invalidate();
+              reset();
+            }}
+            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+          >
+            Try again
+          </button>
+          <a
+            href="/"
+            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+          >
+            Go home
+          </a>
+        </div>
       </div>
     </div>
   );
@@ -67,14 +76,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Tamghart l'Artisane — Héritage des femmes amazighes" },
-      { name: "description", content: "Tamghart l'Artisane valorise le patrimoine culturel amazigh à travers le savoir-faire des femmes artisanes." },
+      { title: "Tamghart l'Artisane — Artisanat des femmes amazighes" },
+      { name: "description", content: "Tamghart l’Artisane met en avant l’artisanat amazigh authentique des femmes marocaines, leurs créations et leur savoir-faire traditionnel." },
       { name: "author", content: "Tamghart l'Artisane" },
-      { property: "og:title", content: "Tamghart l'Artisane" },
-      { property: "og:description", content: "Patrimoine vivant des femmes amazighes du Maroc." },
+      { property: "og:title", content: "Tamghart l'Artisane — Artisanat des femmes amazighes" },
+      { property: "og:description", content: "Tamghart l’Artisane met en avant l’artisanat amazigh authentique des femmes marocaines, leurs créations et leur savoir-faire traditionnel." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Tamghart l'Artisane — Artisanat des femmes amazighes" },
+      { name: "twitter:description", content: "Tamghart l’Artisane met en avant l’artisanat amazigh authentique des femmes marocaines, leurs créations et leur savoir-faire traditionnel." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/7318d001-52a6-48a6-a787-1933355c536a/id-preview-3d1f52e3--35755914-8e17-4c3c-9d30-7209617ffc45.lovable.app-1778979463132.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/7318d001-52a6-48a6-a787-1933355c536a/id-preview-3d1f52e3--35755914-8e17-4c3c-9d30-7209617ffc45.lovable.app-1778979463132.png" },
     ],
     links: [
       {
