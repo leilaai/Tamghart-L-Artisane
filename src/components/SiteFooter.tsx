@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useI18n } from "@/lib/i18n";
-import { Instagram, Facebook, MessageCircle } from "lucide-react";
+import { Instagram, Facebook } from "lucide-react";
 import { BrandBlock } from "@/components/SiteHeader";
 
 // Custom TikTok glyph (no lucide icon)
@@ -12,11 +12,20 @@ function TikTokIcon({ className }: { className?: string }) {
   );
 }
 
+// Authentic WhatsApp glyph
+function WhatsAppIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 32 32" aria-hidden className={className} fill="currentColor">
+      <path d="M16.003 3C9.376 3 4 8.376 4 15c0 2.367.69 4.566 1.876 6.422L4 29l7.79-1.82A11.94 11.94 0 0 0 16.003 27C22.63 27 28 21.624 28 15S22.63 3 16.003 3Zm0 21.6a9.59 9.59 0 0 1-4.882-1.336l-.35-.21-4.62 1.08 1.097-4.502-.228-.36A9.6 9.6 0 1 1 16.003 24.6Zm5.49-7.18c-.3-.15-1.78-.88-2.057-.98-.276-.1-.477-.15-.68.15-.2.3-.78.98-.957 1.18-.176.2-.353.225-.654.075-.3-.15-1.27-.467-2.42-1.49-.894-.797-1.498-1.78-1.674-2.08-.176-.3-.019-.462.132-.612.135-.135.3-.353.45-.53.15-.176.2-.3.3-.5.1-.2.05-.376-.025-.526-.075-.15-.68-1.638-.933-2.245-.246-.59-.497-.51-.683-.52l-.583-.01a1.12 1.12 0 0 0-.81.376c-.276.3-1.057 1.033-1.057 2.52 0 1.487 1.08 2.924 1.23 3.124.15.2 2.13 3.255 5.17 4.564.722.312 1.286.498 1.726.638.725.23 1.385.198 1.906.12.582-.088 1.78-.728 2.032-1.43.25-.703.25-1.305.176-1.43-.075-.125-.276-.2-.577-.35Z"/>
+    </svg>
+  );
+}
+
 const socials = [
   { href: "https://instagram.com/tamghart.artisane", Icon: Instagram, label: "Instagram" },
   { href: "https://facebook.com/tamghart.artisane", Icon: Facebook, label: "Facebook" },
   { href: "https://tiktok.com/@tamghart.artisane", Icon: TikTokIcon, label: "TikTok" },
-  { href: "https://wa.me/212600000000", Icon: MessageCircle, label: "WhatsApp" },
+  { href: "https://wa.me/212600000000", Icon: WhatsAppIcon, label: "WhatsApp" },
 ];
 
 export function SiteFooter() {
