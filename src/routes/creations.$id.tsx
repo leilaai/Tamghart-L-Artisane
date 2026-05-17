@@ -27,7 +27,7 @@ function CreationDetail() {
   const avg = reviews.length ? reviews.reduce((s, r) => s + r.rating, 0) / reviews.length : 0;
 
   return (
-    <div className="mx-auto max-w-7xl px-6 py-20">
+    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-20">
       <nav className="mb-8 text-xs tracking-brand text-muted-foreground">
         <Link to="/" className="hover:text-accent">ACCUEIL</Link> ›{" "}
         <Link to="/creations" className="hover:text-accent">CRÉATIONS</Link> ›{" "}
