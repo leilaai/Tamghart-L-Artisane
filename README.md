@@ -12,7 +12,7 @@ L’objectif est de faciliter la découverte des produits artisanaux tout en off
 ## Démonstration
 
 🌐 Site web :  
-[Ajouter le lien Vercel ou Lovable]
+https://tamghartlartisane.lovable.app
 
 ---
 ## Fonctionnalités
