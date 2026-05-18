@@ -89,22 +89,22 @@ function LangGlobe() {
 export function BrandBlock({ size = "md" }: { size?: "sm" | "md" }) {
   const isSm = size === "sm";
   return (
-    <div className="flex items-center gap-3 sm:gap-4">
+    <div className="flex items-center gap-2 sm:gap-4">
       <img
         src={logo}
         alt=""
         width={84}
         height={84}
-        className={isSm ? "h-12 w-12 object-contain" : "h-16 w-16 object-contain sm:h-20 sm:w-20"}
+        className={isSm ? "h-10 w-10 object-contain" : "h-10 w-10 object-contain sm:h-16 sm:w-16 md:h-20 md:w-20"}
       />
       <div className="flex flex-col items-center leading-none">
-        <span className={`font-display font-semibold tracking-[0.12em] text-earth ${isSm ? "text-xl" : "text-2xl sm:text-3xl"}`}>TAMGHART</span>
-        <span className={`mt-1 flex items-center gap-2 font-display tracking-[0.35em] text-clay ${isSm ? "text-[0.6rem]" : "text-[0.65rem] sm:text-xs"}`}>
+        <span className={`font-display font-semibold tracking-[0.12em] text-earth ${isSm ? "text-lg" : "text-sm sm:text-2xl md:text-3xl"}`}>TAMGHART</span>
+        <span className={`mt-1 flex items-center gap-1.5 font-display tracking-[0.25em] text-clay sm:gap-2 sm:tracking-[0.35em] ${isSm ? "text-[0.55rem]" : "text-[0.45rem] sm:text-[0.65rem] md:text-xs"}`}>
           <span aria-hidden>✦</span>
           L'ARTISANE
           <span aria-hidden>✦</span>
         </span>
-        <span className={`mt-1 tracking-[0.25em] text-clay ${isSm ? "text-[0.6rem]" : "text-[0.65rem] sm:text-xs"}`} aria-hidden>
+        <span className={`mt-1 tracking-[0.15em] text-clay sm:tracking-[0.25em] ${isSm ? "text-[0.55rem]" : "text-[0.45rem] sm:text-[0.65rem] md:text-xs"}`} aria-hidden>
           ⵜⴰⵎⵖⴰⵔⵜ ⵍⴰⵕⵟⵉⵙⴰⵏ
         </span>
       </div>
@@ -114,7 +114,7 @@ export function BrandBlock({ size = "md" }: { size?: "sm" | "md" }) {
 
 function Brand() {
   return (
-    <Link to="/" className="flex items-center gap-3 sm:gap-4" aria-label="Tamghart l'Artisane — Accueil">
+    <Link to="/" className="flex items-center gap-2 sm:gap-4" aria-label="Tamghart l'Artisane — Accueil">
       <BrandBlock />
     </Link>
   );
@@ -153,9 +153,10 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-3 text-foreground/70 sm:gap-4">
+        <div className="flex items-center gap-2 text-foreground/70 sm:gap-4">
           <LangSwitcher />
-          <Link to="/" hash="recherche" aria-label={t("nav.search")} className="hidden transition-colors hover:text-accent sm:inline-flex">
+          <LangGlobe />
+          <Link to="/" hash="recherche" aria-label={t("nav.search")} className="transition-colors hover:text-accent">
             <Search className="h-5 w-5" />
           </Link>
           <Link to="/favoris" aria-label={t("nav.favorites")} className="relative transition-colors hover:text-accent">
