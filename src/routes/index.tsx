@@ -64,10 +64,10 @@ function Home() {
   const { isFavorite, toggleFavorite } = useStore();
 
   const pillars = [
-    { title: t("pillars.1.t"), desc: t("pillars.1.d"), bg: "bg-earth text-cream", to: "/galerie" as const },
-    { title: t("pillars.2.t"), desc: t("pillars.2.d"), bg: "bg-clay text-cream", to: "/artisanes" as const },
-    { title: t("pillars.3.t"), desc: t("pillars.3.d"), bg: "bg-sand text-earth", to: "/creations" as const },
-    { title: t("pillars.4.t"), desc: t("pillars.4.d"), bg: "bg-honey text-earth", to: "/artisanes" as const },
+    { title: t("pillars.4.t"), desc: t("pillars.4.d"), bg: "bg-earth text-cream", to: "/artisanes" as const },
+    { title: t("pillars.3.t"), desc: t("pillars.3.d"), bg: "bg-clay text-cream", to: "/creations" as const },
+    { title: t("pillars.1.t"), desc: t("pillars.1.d"), bg: "bg-honey text-earth", to: "/galerie" as const },
+    { title: t("pillars.5.t"), desc: t("pillars.5.d"), bg: "bg-sand text-earth", to: "/a-propos" as const },
   ];
 
   return (
@@ -235,7 +235,7 @@ function Home() {
             poster={textile}
             className="h-full w-full object-cover"
           >
-            <source src="https://cdn.coverr.co/videos/coverr-a-craftswoman-weaving-a-rug-2483/1080p.mp4" type="video/mp4" />
+            <source src="/video-tamghart.mp4" type="video/mp4" />
           </video>
         </div>
       </section>
