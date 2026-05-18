@@ -185,31 +185,31 @@ export function SiteHeader() {
             type="button"
             aria-label="Fermer le menu"
             onClick={() => setOpen(false)}
-            className="fixed inset-0 z-40 bg-earth/40 backdrop-blur-sm lg:hidden"
+            className="fixed inset-0 z-40 bg-transparent lg:hidden"
           />
           <nav
             aria-label="Mobile"
-            className="fixed right-0 top-0 z-50 h-full w-72 max-w-[85vw] border-l border-border bg-cream shadow-2xl lg:hidden"
+            className="fixed right-0 top-0 z-50 h-full w-72 max-w-[85vw] border-l-2 border-earth bg-cream shadow-2xl lg:hidden"
           >
-            <div className="flex items-center justify-between border-b border-border/60 px-4 py-3">
-              <span className="text-xs tracking-brand text-earth/70">MENU</span>
+            <div className="flex items-center justify-between border-b-2 border-earth/30 bg-sand px-4 py-3">
+              <span className="text-xs font-semibold tracking-brand text-earth">MENU</span>
               <button
                 type="button"
                 aria-label="Fermer"
                 onClick={() => setOpen(false)}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-sm hover:bg-sand"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-sm border border-earth/30 bg-cream text-earth hover:bg-honey"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
-            <ul className="flex flex-col px-4 py-2">
+            <ul className="flex flex-col px-2 py-3">
               {nav.map((n) => (
-                <li key={n.to}>
+                <li key={n.to} className="border-b border-earth/15 last:border-b-0">
                   <Link
                     to={n.to}
                     onClick={() => setOpen(false)}
-                    className="block py-3 text-sm tracking-wide text-earth hover:text-accent"
-                    activeProps={{ className: "text-accent font-medium" }}
+                    className="block px-3 py-4 text-base font-medium tracking-wide text-earth hover:bg-honey hover:text-earth focus-visible:bg-honey focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                    activeProps={{ className: "bg-earth text-cream" }}
                     activeOptions={{ exact: n.exact }}
                   >
                     {n.label}

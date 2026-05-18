@@ -230,10 +230,14 @@ function Home() {
         </div>
         <div className="mx-auto mt-8 aspect-video w-full max-w-4xl overflow-hidden rounded-sm bg-earth shadow-xl">
           <video
-            controls
-            preload="metadata"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
             poster={textile}
-            className="h-full w-full object-cover"
+            aria-label="Vidéo d'ambiance : artisanes amazighes au travail"
+            className="h-full w-full object-cover pointer-events-none"
           >
             <source src="/video-tamghart.mp4" type="video/mp4" />
           </video>
