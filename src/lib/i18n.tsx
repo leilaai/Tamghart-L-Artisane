@@ -40,6 +40,8 @@ const base: Record<Lang, Dict> = {
     "pillars.3.d": "Aucun intermédiaire, aucune copie.",
     "pillars.4.t": "Femmes inspirantes",
     "pillars.4.d": "Soutenir leurs ateliers, c'est soutenir leurs villages.",
+    "pillars.5.t": "Notre maison",
+    "pillars.5.d": "Un site qui valorise et donne visibilité aux femmes amazighes artisanes.",
     "pillars.cta": "DÉCOUVRIR →",
 
     "artisans.kicker": "PORTRAITS",
@@ -196,6 +198,8 @@ const base: Record<Lang, Dict> = {
     "pillars.3.d": "No middlemen, no copies.",
     "pillars.4.t": "Inspiring women",
     "pillars.4.d": "Supporting their workshops means supporting their villages.",
+    "pillars.5.t": "Our house",
+    "pillars.5.d": "A platform that honors and gives visibility to Amazigh women artisans.",
     "pillars.cta": "DISCOVER →",
 
     "artisans.kicker": "PORTRAITS",
@@ -346,6 +350,8 @@ const base: Record<Lang, Dict> = {
     "pillars.3.d": "بدون وسطاء وبدون نسخ.",
     "pillars.4.t": "نساء ملهمات",
     "pillars.4.d": "دعم ورشاتهن هو دعم لقراهن.",
+    "pillars.5.t": "بيتنا",
+    "pillars.5.d": "منصة تُبرز وتُعطي صوتاً للمرأة الأمازيغية الحرفية.",
     "pillars.cta": "اكتشف ←",
 
     "artisans.kicker": "بورتريهات",
@@ -496,6 +502,8 @@ const base: Record<Lang, Dict> = {
     "pillars.3.d": "ⵓⵔ ⵉⵍⵍⵉ ⵓⵎⴰⵍⴽⵎ.",
     "pillars.4.t": "ⵜⵉⵎⵖⴰⵔⵉⵏ ⵏⵏⴽⵔⴰⵏ",
     "pillars.4.d": "ⴰⴽⴽⵎⵔⵏⵜ ⵉⴷⵓⴷⴰⵔ ⵏⵏⵙⵏⵜ.",
+    "pillars.5.t": "ⵜⴰⴷⴷⴰⵔⵜ ⵏⵏⵖ",
+    "pillars.5.d": "ⴰⵙⵉⵜ ⵉⵙⴱⴰⵏⵏ ⵜⵉⵎⵖⴰⵔⵉⵏ ⵜⵉⵎⵣⵉⵖⵉⵏ.",
     "pillars.cta": "ⴰⴼ →",
 
     "artisans.kicker": "ⵉⵎⵙⵍⵉⵜⵏ",
