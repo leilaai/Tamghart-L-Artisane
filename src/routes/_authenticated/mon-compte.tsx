@@ -80,7 +80,7 @@ function MonComptePage() {
                 <li key={c.id}>
                   <Link to="/creations/$id" params={{ id: c.id }} className="flex items-center gap-3 rounded-sm border border-border bg-cream p-2 hover:bg-sand">
                     <img src={c.image} alt="" className="h-14 w-14 rounded-sm object-cover" />
-                    <span className="text-sm text-earth">{c.title}</span>
+                    <span className="text-sm text-earth">{c.name}</span>
                   </Link>
                 </li>
               ))}
