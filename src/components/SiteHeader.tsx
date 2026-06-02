@@ -1,9 +1,10 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import logo from "@/assets/logo-tamghart.png";
-import { Search, Heart, ShoppingBag, Menu, X, Globe } from "lucide-react";
+import { Search, Heart, ShoppingBag, Menu, X, Globe, User as UserIcon, LogOut } from "lucide-react";
 import { useStore } from "@/lib/store";
 import { useEffect, useRef, useState } from "react";
 import { useI18n, LANG_LABELS, type Lang } from "@/lib/i18n";
+import { useAuth } from "@/lib/auth";
 
 function Badge({ count }: { count: number }) {
   if (!count) return null;
@@ -80,6 +81,73 @@ function LangGlobe() {
               </button>
             );
           })}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function UserMenu() {
+  const { user, profile, signOut } = useAuth();
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const onDoc = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", onDoc);
+    return () => document.removeEventListener("mousedown", onDoc);
+  }, []);
+
+  if (!user) {
+    return (
+      <Link
+        to="/connexion"
+        className="inline-flex items-center gap-1.5 rounded-sm border border-earth/30 bg-cream px-2.5 py-1.5 text-xs font-medium tracking-[0.12em] text-earth transition-colors hover:bg-sand sm:px-3"
+        aria-label="Connexion"
+      >
+        <UserIcon className="h-4 w-4" />
+        <span className="hidden sm:inline">CONNEXION</span>
+      </Link>
+    );
+  }
+
+  const initial = (profile?.first_name?.[0] || user.email?.[0] || "U").toUpperCase();
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-haspopup="menu"
+        aria-expanded={open}
+        aria-label="Mon compte"
+        className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-clay text-sm font-semibold text-cream shadow-sm transition-transform hover:scale-105"
+      >
+        {initial}
+      </button>
+      {open && (
+        <div role="menu" className="absolute right-0 top-full z-50 mt-2 min-w-[12rem] rounded-sm border border-border bg-cream p-1 shadow-lg">
+          <div className="border-b border-border px-3 py-2 text-xs text-muted-foreground">
+            {profile?.first_name ? `Bonjour, ${profile.first_name}` : user.email}
+          </div>
+          <Link
+            to="/mon-compte"
+            role="menuitem"
+            onClick={() => setOpen(false)}
+            className="flex items-center gap-2 rounded-[2px] px-3 py-2 text-xs text-earth hover:bg-sand"
+          >
+            <UserIcon className="h-3.5 w-3.5" /> Mon compte
+          </Link>
+          <button
+            role="menuitem"
+            onClick={async () => { setOpen(false); await signOut(); navigate({ to: "/" }); }}
+            className="flex w-full items-center gap-2 rounded-[2px] px-3 py-2 text-left text-xs text-clay hover:bg-sand"
+          >
+            <LogOut className="h-3.5 w-3.5" /> Se déconnecter
+          </button>
         </div>
       )}
     </div>
@@ -167,6 +235,7 @@ export function SiteHeader() {
             <ShoppingBag className="h-5 w-5" />
             <Badge count={cart.length} />
           </Link>
+          <UserMenu />
           <button
             type="button"
             aria-label="Menu"
