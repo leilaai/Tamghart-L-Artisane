@@ -9,17 +9,21 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ReinitialiserMotDePasseRouteImport } from './routes/reinitialiser-mot-de-passe'
 import { Route as RechercheRouteImport } from './routes/recherche'
 import { Route as QuiSommesNousRouteImport } from './routes/qui-sommes-nous'
 import { Route as PanierRouteImport } from './routes/panier'
+import { Route as InscriptionRouteImport } from './routes/inscription'
 import { Route as FavorisRouteImport } from './routes/favoris'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as EntretienRouteImport } from './routes/entretien'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as ConnexionRouteImport } from './routes/connexion'
 import { Route as ConfidentialiteRouteImport } from './routes/confidentialite'
 import { Route as ConditionsGeneralesRouteImport } from './routes/conditions-generales'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AProposRouteImport } from './routes/a-propos'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as GalerieIndexRouteImport } from './routes/galerie.index'
 import { Route as CreationsIndexRouteImport } from './routes/creations.index'
@@ -31,7 +35,13 @@ import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
 import { Route as AdminCreationsRouteImport } from './routes/admin.creations'
 import { Route as AdminCommandesRouteImport } from './routes/admin.commandes'
 import { Route as AdminArtisanesRouteImport } from './routes/admin.artisanes'
+import { Route as AuthenticatedMonCompteRouteImport } from './routes/_authenticated/mon-compte'
 
+const ReinitialiserMotDePasseRoute = ReinitialiserMotDePasseRouteImport.update({
+  id: '/reinitialiser-mot-de-passe',
+  path: '/reinitialiser-mot-de-passe',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RechercheRoute = RechercheRouteImport.update({
   id: '/recherche',
   path: '/recherche',
@@ -45,6 +55,11 @@ const QuiSommesNousRoute = QuiSommesNousRouteImport.update({
 const PanierRoute = PanierRouteImport.update({
   id: '/panier',
   path: '/panier',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InscriptionRoute = InscriptionRouteImport.update({
+  id: '/inscription',
+  path: '/inscription',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FavorisRoute = FavorisRouteImport.update({
@@ -67,6 +82,11 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ConnexionRoute = ConnexionRouteImport.update({
+  id: '/connexion',
+  path: '/connexion',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ConfidentialiteRoute = ConfidentialiteRouteImport.update({
   id: '/confidentialite',
   path: '/confidentialite',
@@ -85,6 +105,10 @@ const AdminRoute = AdminRouteImport.update({
 const AProposRoute = AProposRouteImport.update({
   id: '/a-propos',
   path: '/a-propos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -142,6 +166,11 @@ const AdminArtisanesRoute = AdminArtisanesRouteImport.update({
   path: '/artisanes',
   getParentRoute: () => AdminRoute,
 } as any)
+const AuthenticatedMonCompteRoute = AuthenticatedMonCompteRouteImport.update({
+  id: '/mon-compte',
+  path: '/mon-compte',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -149,13 +178,17 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRouteWithChildren
   '/conditions-generales': typeof ConditionsGeneralesRoute
   '/confidentialite': typeof ConfidentialiteRoute
+  '/connexion': typeof ConnexionRoute
   '/contact': typeof ContactRoute
   '/entretien': typeof EntretienRoute
   '/faq': typeof FaqRoute
   '/favoris': typeof FavorisRoute
+  '/inscription': typeof InscriptionRoute
   '/panier': typeof PanierRoute
   '/qui-sommes-nous': typeof QuiSommesNousRoute
   '/recherche': typeof RechercheRoute
+  '/reinitialiser-mot-de-passe': typeof ReinitialiserMotDePasseRoute
+  '/mon-compte': typeof AuthenticatedMonCompteRoute
   '/admin/artisanes': typeof AdminArtisanesRoute
   '/admin/commandes': typeof AdminCommandesRoute
   '/admin/creations': typeof AdminCreationsRoute
@@ -173,13 +206,17 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminRouteWithChildren
   '/conditions-generales': typeof ConditionsGeneralesRoute
   '/confidentialite': typeof ConfidentialiteRoute
+  '/connexion': typeof ConnexionRoute
   '/contact': typeof ContactRoute
   '/entretien': typeof EntretienRoute
   '/faq': typeof FaqRoute
   '/favoris': typeof FavorisRoute
+  '/inscription': typeof InscriptionRoute
   '/panier': typeof PanierRoute
   '/qui-sommes-nous': typeof QuiSommesNousRoute
   '/recherche': typeof RechercheRoute
+  '/reinitialiser-mot-de-passe': typeof ReinitialiserMotDePasseRoute
+  '/mon-compte': typeof AuthenticatedMonCompteRoute
   '/admin/artisanes': typeof AdminArtisanesRoute
   '/admin/commandes': typeof AdminCommandesRoute
   '/admin/creations': typeof AdminCreationsRoute
@@ -194,17 +231,22 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/a-propos': typeof AProposRoute
   '/admin': typeof AdminRouteWithChildren
   '/conditions-generales': typeof ConditionsGeneralesRoute
   '/confidentialite': typeof ConfidentialiteRoute
+  '/connexion': typeof ConnexionRoute
   '/contact': typeof ContactRoute
   '/entretien': typeof EntretienRoute
   '/faq': typeof FaqRoute
   '/favoris': typeof FavorisRoute
+  '/inscription': typeof InscriptionRoute
   '/panier': typeof PanierRoute
   '/qui-sommes-nous': typeof QuiSommesNousRoute
   '/recherche': typeof RechercheRoute
+  '/reinitialiser-mot-de-passe': typeof ReinitialiserMotDePasseRoute
+  '/_authenticated/mon-compte': typeof AuthenticatedMonCompteRoute
   '/admin/artisanes': typeof AdminArtisanesRoute
   '/admin/commandes': typeof AdminCommandesRoute
   '/admin/creations': typeof AdminCreationsRoute
@@ -224,13 +266,17 @@ export interface FileRouteTypes {
     | '/admin'
     | '/conditions-generales'
     | '/confidentialite'
+    | '/connexion'
     | '/contact'
     | '/entretien'
     | '/faq'
     | '/favoris'
+    | '/inscription'
     | '/panier'
     | '/qui-sommes-nous'
     | '/recherche'
+    | '/reinitialiser-mot-de-passe'
+    | '/mon-compte'
     | '/admin/artisanes'
     | '/admin/commandes'
     | '/admin/creations'
@@ -248,13 +294,17 @@ export interface FileRouteTypes {
     | '/admin'
     | '/conditions-generales'
     | '/confidentialite'
+    | '/connexion'
     | '/contact'
     | '/entretien'
     | '/faq'
     | '/favoris'
+    | '/inscription'
     | '/panier'
     | '/qui-sommes-nous'
     | '/recherche'
+    | '/reinitialiser-mot-de-passe'
+    | '/mon-compte'
     | '/admin/artisanes'
     | '/admin/commandes'
     | '/admin/creations'
@@ -268,17 +318,22 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/a-propos'
     | '/admin'
     | '/conditions-generales'
     | '/confidentialite'
+    | '/connexion'
     | '/contact'
     | '/entretien'
     | '/faq'
     | '/favoris'
+    | '/inscription'
     | '/panier'
     | '/qui-sommes-nous'
     | '/recherche'
+    | '/reinitialiser-mot-de-passe'
+    | '/_authenticated/mon-compte'
     | '/admin/artisanes'
     | '/admin/commandes'
     | '/admin/creations'
@@ -293,17 +348,21 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AProposRoute: typeof AProposRoute
   AdminRoute: typeof AdminRouteWithChildren
   ConditionsGeneralesRoute: typeof ConditionsGeneralesRoute
   ConfidentialiteRoute: typeof ConfidentialiteRoute
+  ConnexionRoute: typeof ConnexionRoute
   ContactRoute: typeof ContactRoute
   EntretienRoute: typeof EntretienRoute
   FaqRoute: typeof FaqRoute
   FavorisRoute: typeof FavorisRoute
+  InscriptionRoute: typeof InscriptionRoute
   PanierRoute: typeof PanierRoute
   QuiSommesNousRoute: typeof QuiSommesNousRoute
   RechercheRoute: typeof RechercheRoute
+  ReinitialiserMotDePasseRoute: typeof ReinitialiserMotDePasseRoute
   ArtisanesIdRoute: typeof ArtisanesIdRoute
   CreationsIdRoute: typeof CreationsIdRoute
   GalerieSlugRoute: typeof GalerieSlugRoute
@@ -314,6 +373,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/reinitialiser-mot-de-passe': {
+      id: '/reinitialiser-mot-de-passe'
+      path: '/reinitialiser-mot-de-passe'
+      fullPath: '/reinitialiser-mot-de-passe'
+      preLoaderRoute: typeof ReinitialiserMotDePasseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/recherche': {
       id: '/recherche'
       path: '/recherche'
@@ -333,6 +399,13 @@ declare module '@tanstack/react-router' {
       path: '/panier'
       fullPath: '/panier'
       preLoaderRoute: typeof PanierRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inscription': {
+      id: '/inscription'
+      path: '/inscription'
+      fullPath: '/inscription'
+      preLoaderRoute: typeof InscriptionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/favoris': {
@@ -363,6 +436,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/connexion': {
+      id: '/connexion'
+      path: '/connexion'
+      fullPath: '/connexion'
+      preLoaderRoute: typeof ConnexionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/confidentialite': {
       id: '/confidentialite'
       path: '/confidentialite'
@@ -389,6 +469,13 @@ declare module '@tanstack/react-router' {
       path: '/a-propos'
       fullPath: '/a-propos'
       preLoaderRoute: typeof AProposRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -468,8 +555,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminArtisanesRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/_authenticated/mon-compte': {
+      id: '/_authenticated/mon-compte'
+      path: '/mon-compte'
+      fullPath: '/mon-compte'
+      preLoaderRoute: typeof AuthenticatedMonCompteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedMonCompteRoute: typeof AuthenticatedMonCompteRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedMonCompteRoute: AuthenticatedMonCompteRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
 interface AdminRouteChildren {
   AdminArtisanesRoute: typeof AdminArtisanesRoute
@@ -489,17 +594,21 @@ const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AProposRoute: AProposRoute,
   AdminRoute: AdminRouteWithChildren,
   ConditionsGeneralesRoute: ConditionsGeneralesRoute,
   ConfidentialiteRoute: ConfidentialiteRoute,
+  ConnexionRoute: ConnexionRoute,
   ContactRoute: ContactRoute,
   EntretienRoute: EntretienRoute,
   FaqRoute: FaqRoute,
   FavorisRoute: FavorisRoute,
+  InscriptionRoute: InscriptionRoute,
   PanierRoute: PanierRoute,
   QuiSommesNousRoute: QuiSommesNousRoute,
   RechercheRoute: RechercheRoute,
+  ReinitialiserMotDePasseRoute: ReinitialiserMotDePasseRoute,
   ArtisanesIdRoute: ArtisanesIdRoute,
   CreationsIdRoute: CreationsIdRoute,
   GalerieSlugRoute: GalerieSlugRoute,
