@@ -1,9 +1,10 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import logo from "@/assets/logo-tamghart.png";
-import { Search, Heart, ShoppingBag, Menu, X, Globe } from "lucide-react";
+import { Search, Heart, ShoppingBag, Menu, X, Globe, User as UserIcon, LogOut } from "lucide-react";
 import { useStore } from "@/lib/store";
 import { useEffect, useRef, useState } from "react";
 import { useI18n, LANG_LABELS, type Lang } from "@/lib/i18n";
+import { useAuth } from "@/lib/auth";
 
 function Badge({ count }: { count: number }) {
   if (!count) return null;
