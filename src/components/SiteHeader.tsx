@@ -168,6 +168,7 @@ export function SiteHeader() {
             <ShoppingBag className="h-5 w-5" />
             <Badge count={cart.length} />
           </Link>
+          <UserMenu />
           <button
             type="button"
             aria-label="Menu"
